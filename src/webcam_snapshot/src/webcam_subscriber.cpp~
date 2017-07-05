@@ -20,7 +20,7 @@ void stream_Callback(const sensor_msgs::ImageConstPtr& msg)
 
 }
 
-bool take(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res) 
+bool take_snapshot(std_srvs::Empty::Request &req, std_srvs::Empty::Response &res) 
 {
   ROS_INFO("Service called!");
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
   ros::Subscriber sub = n.subscribe("/usb_cam/image_raw", 1, stream_Callback);
 
-  ros::ServiceServer service_snapshot = n.advertiseService("/take_snapshot", take);
+  ros::ServiceServer service_snapshot = n.advertiseService("/take_snapshot", take_snapshot);
 
   ros::spin();
   cv::destroyWindow("Image window");

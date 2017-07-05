@@ -46,6 +46,8 @@ int main(int argc, char **argv)
 
   ros::ServiceServer service_snapshot = n.advertiseService("/take_snapshot", take_snapshot);
 
+  ROS_INFO("Node Started");
+
   ros::spin();
   cv::destroyWindow("Image window");
   return 0;
