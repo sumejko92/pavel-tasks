@@ -5,9 +5,10 @@
 #include <sstream>
 #include <vector>
 #include <string>
-
+//#include<geometry_msgs/TransformStamped.h>
 
 tf::Transform transform;
+//geometry_msgs::TransformStamped tfs;
 
 //receives the input string and extracts the num values values 
 void process_input(const std::string& input)
@@ -31,17 +32,17 @@ void process_input(const std::string& input)
     // print the parsed values
     std::cout << " "<<std::endl;
     ROS_INFO("Parsed:");
-    std::cout << "X:"<<std::endl;
+    std::cout << "X:";
     std::cout << vect.at(0)<<std::endl;
-    std::cout << "Y:"<<std::endl;
+    std::cout << "Y:";
     std::cout << vect.at(1)<<std::endl;
-    std::cout << "Z:"<<std::endl;
+    std::cout << "Z:";
     std::cout << vect.at(2)<<std::endl;
-    std::cout << "ROLL:"<<std::endl;
+    std::cout << "ROLL:";
     std::cout << vect.at(3)<<std::endl;
-    std::cout << "PITCH:"<<std::endl;
+    std::cout << "PITCH:";
     std::cout << vect.at(4)<<std::endl;
-    std::cout << "YAW:"<<std::endl;
+    std::cout << "YAW:";
     std::cout << vect.at(5)<<std::endl;
     std::cout << " "<<std::endl; 
 
@@ -73,7 +74,7 @@ int main(int argc, char** argv)
   	std::cin >> input_str;
 	process_input(input_str);
   	
-        
+        //broadcasting transform between frames 
         br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "world/base_tf_enu"));
         //tf_pub.publish(transform);
 
