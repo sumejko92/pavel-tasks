@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <geometry_msgs/TransformStamped.h>
+#include "thread"
 
 //tf::Transform transform;
 geometry_msgs::TransformStamped tfs;
@@ -57,6 +58,16 @@ void process_input(const std::string& input)
    
 }
 
+//thread func for publishing
+void thread_publish(ros::Publisher pub)
+{
+	ros::Rate r(1.0);
+	while(1)
+	{	
+	    pub.publish(tfs);
+	    r.sleep();
+	}
+}
 
 
 int main(int argc, char** argv)
@@ -84,7 +95,10 @@ int main(int argc, char** argv)
   
   std::string input_str;
 
-  ros::Rate rate(1.0);
+  std::thread t(thread_publish,tf_pub);
+  t.detach();
+
+  ros::Rate rate(10.0);
   while (n.ok()){
 
   	ROS_INFO("Awaiting user input of 6 numbers divided with ',': ");
@@ -93,7 +107,7 @@ int main(int argc, char** argv)
   	
 
 	//publishes ONLY ONCE per cycle due to waiting for raw input, there must be an easy fix to publish asinc but multithreading would be an overkill
-        tf_pub.publish(tfs);
+        //tf_pub.publish(tfs);
 
 
 	//broadcasts the transformation every second
