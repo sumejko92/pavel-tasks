@@ -1,10 +1,9 @@
 #include "ros/ros.h"
-#include "ros_threads/time_delay.h"
+#include "ros_threads/TimeDelay.h"
 //#include "ctime"
 #include "string"
 #include "thread"
 #include "chrono"
-
 
 void start_thread(int td,std::string response)
 {
@@ -13,8 +12,8 @@ void start_thread(int td,std::string response)
 }
 
 
-bool serviceCallback(ros_threads::time_delay::Request  &req,
-         ros_threads::time_delay::Response &res)
+bool serviceCallback(ros_threads::TimeDelay::Request  &req,
+         ros_threads::TimeDelay::Response &res)
 {
   // grab the unix time
   //std::time_t result = std::time(nullptr);
@@ -23,12 +22,9 @@ bool serviceCallback(ros_threads::time_delay::Request  &req,
   int milisec = result.nsec/1000;
   res.Time = std::to_string(result.sec) + "." + std::to_string(milisec);
   
-
-
   ROS_INFO("Receiving request: Delay=%ld", (long int)req.Delay_s);
 
-
-  if(req.Delay_s > 0 && req.Delay_s <3)
+  if(req.Delay_s > 0 && req.Delay_s < 3)
   {
 	std::thread t(start_thread,req.Delay_s,res.Time);
 	t.detach();
@@ -44,7 +40,7 @@ bool serviceCallback(ros_threads::time_delay::Request  &req,
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "threads_server");
+  ros::init(argc, argv, "threads_server_old");
   ros::NodeHandle n;
 
   ros::ServiceServer service = n.advertiseService("/unix_time_now", serviceCallback);

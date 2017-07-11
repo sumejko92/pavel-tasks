@@ -58,7 +58,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate services in the 'srv' folder
  add_service_files(
    FILES
-   time_delay.srv
+   TimeDelay.srv
   
  )
 
@@ -200,6 +200,10 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(threads_server src/threads_server.cpp)
+add_executable(threads_server src/ThreadsServer.cpp)
 target_link_libraries(threads_server ${catkin_LIBRARIES})
 add_dependencies(threads_server ros_threads_gencpp)
+
+add_executable(threads_client src/threads_client.cpp)
+target_link_libraries(threads_client ${catkin_LIBRARIES})
+add_dependencies(threads_client ros_threads_gencpp)

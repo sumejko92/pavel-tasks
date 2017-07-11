@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "ros_threads/time_delay.h"
+#include "ros_threads/TimeDelay.h"
 #include "random"
 #include "string"
 #include "thread"
@@ -10,7 +10,7 @@ ros::ServiceClient client;
 
 void start_thread()
 {
-    ros_threads::time_delay srv;
+    ros_threads::TimeDelay srv;
 
     double numeric;
 
@@ -41,10 +41,10 @@ void start_thread()
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "threads_client");
+  ros::init(argc, argv, "threads_client_old");
 
   ros::NodeHandle n;
-  client = n.serviceClient<ros_threads::time_delay>("/unix_time_now");
+  client = n.serviceClient<ros_threads::TimeDelay>("/unix_time_now");
 
   std::thread t(start_thread);
   t.detach();
