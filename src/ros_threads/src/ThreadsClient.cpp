@@ -47,8 +47,8 @@ void Client::startThread()
 
     double numeric;    // local variable to store a numeric value
 
-    ros::Rate r(1.0);    // 1 Hz rate for 1 sec loop     
-    while(1)
+    ros::Rate r_hz(1.0);    // 1 Hz rate for 1 sec loop     
+    while(ros::ok())
     {
         int random_num=rand()% 4 + 1;    // creates random integer in the range between 0 and 5	
 	srv.request.Delay_s = random_num;     // initialize the request
@@ -70,6 +70,8 @@ void Client::startThread()
 	{
 	    ROS_ERROR("Failed to call service /unix_time_now");
         }
+
+        r_hz.sleep();
     } // end while
 } 
 
