@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(ros_transframes)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -14,7 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
 )
 
-add_definitions(-std=c++11)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -200,11 +200,11 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(tf_publisher_base src/tf_publisher_base.cpp)
+#add_executable(tf_publisher_base src/tf_publisher_base.cpp)
+#target_link_libraries(tf_publisher_base ${catkin_LIBRARIES})
+
+add_executable(tf_publisher_base src/TfPublisherBase.cpp)
 target_link_libraries(tf_publisher_base ${catkin_LIBRARIES})
 
-add_executable(tf_publisher_base_v2 src/tf_publisher_base_v2.cpp)
-target_link_libraries(tf_publisher_base_v2 ${catkin_LIBRARIES})
-
-add_executable(tf_receiver_translator src/tf_receiver_translator.cpp)
+add_executable(tf_receiver_translator src/TfReceiverTranslator.cpp)
 target_link_libraries(tf_receiver_translator ${catkin_LIBRARIES})

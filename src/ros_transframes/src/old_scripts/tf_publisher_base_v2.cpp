@@ -17,10 +17,10 @@ void process_input(const std::string& input)
     ROS_INFO("You entered:");
     std::cout << input << std::endl;
 
-    std::vector<int> vect;
+    std::vector<float> vect;
     std::stringstream ss(input);
 
-    int i;
+    float i;
 
     while (ss >> i)
     {
