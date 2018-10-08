@@ -19,7 +19,6 @@ MenuHandler menu_handler;
 MenuHandler::EntryHandle h_first_entry;
 MenuHandler::EntryHandle h_mode_last;
 
-
 void enableCb( const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback )
 {
   MenuHandler::EntryHandle handle = feedback->menu_entry_id;
@@ -55,8 +54,6 @@ void modeCb( const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedba
   menu_handler.reApply( *server );
   server->applyChanges();
 }
-
-
 
 Marker makeBox( InteractiveMarker &msg )
 {
