@@ -14,6 +14,7 @@
 #include <string>
 #include <geometry_msgs/TransformStamped.h>
 #include <thread>
+#include <stdexcept>
 
 /**
  * This class creates a publisher that publishes and updates the geometry_msgs::TransformStamped messages 
@@ -79,31 +80,34 @@ void TfPublisherBase::processInput(const std::string& input)
         if (ss.peek() == ',')
              ss.ignore();
     }
+	
+    if (vect.size() < 6)
+        throw std::runtime_error("Wrong vector size");
     
     // print the parsed values
     std::cout << " "<<std::endl;
     ROS_INFO("Parsed:");
     std::cout << "X:";
-    std::cout << vect.at(0)<<std::endl;
+    std::cout << vect[0]<<std::endl;
     std::cout << "Y:";
-    std::cout << vect.at(1)<<std::endl;
+    std::cout << vect[1]<<std::endl;
     std::cout << "Z:";
-    std::cout << vect.at(2)<<std::endl;
+    std::cout << vect[2]<<std::endl;
     std::cout << "ROLL:";
-    std::cout << vect.at(3)<<std::endl;
+    std::cout << vect[3]<<std::endl;
     std::cout << "PITCH:";
-    std::cout << vect.at(4)<<std::endl;
+    std::cout << vect[4]<<std::endl;
     std::cout << "YAW:";
-    std::cout << vect.at(5)<<std::endl;
+    std::cout << vect[5]<<std::endl;
     std::cout << " "<<std::endl; 
 
     // update the msg
-    g_tfs.transform.translation.x = vect.at(0);
-    g_tfs.transform.translation.y = vect.at(1);
-    g_tfs.transform.translation.z = vect.at(2);
-    g_tfs.transform.rotation.x = vect.at(3);
-    g_tfs.transform.rotation.y = vect.at(4);
-    g_tfs.transform.rotation.z = vect.at(5);
+    g_tfs.transform.translation.x = vect[0];
+    g_tfs.transform.translation.y = vect[1];
+    g_tfs.transform.translation.z = vect[2];
+    g_tfs.transform.rotation.x = vect[3];
+    g_tfs.transform.rotation.y = vect[4];
+    g_tfs.transform.rotation.z = vect[5];
     g_tfs.transform.rotation.w = 1;
    
 }
